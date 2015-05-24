@@ -1,27 +1,26 @@
-FROM debian:wheezy
+FROM debian:8.0
 
-MAINTAINER Christian Luginbühl <dinke@pimprecords.com>
-
-ENV OPENLDAP_VERSION 2.4.31
+MAINTAINER sebastian.graf@konschtanz.de
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        ldap-utils=${OPENLDAP_VERSION}* \
-        slapd=${OPENLDAP_VERSION}* \
-        vim && \
+        ldap-utils \
+        slapd \
+        vim \
+		ldapscripts && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mv /etc/ldap /etc/ldap.dist
+RUN mv /etc/ldap /etc/ldap.dist & mv /etc/ldapscripts /etc/ldapscripts.dist
 
 EXPOSE 389
 
-VOLUME ["/etc/ldap", "/var/lib/ldap"]
+VOLUME ["/etc/ldap", "/var/lib/ldap", "/etc/ldapscripts"]
 
-COPY modules/ /etc/ldap.dist/modules
+ADD resources /tmp
 
-COPY entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["slapd", "-d", "32768", "-u", "openldap", "-g", "openldap"]
+CMD ["slapd", "-d", "32768"]

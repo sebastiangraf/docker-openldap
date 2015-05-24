@@ -1,0 +1,15 @@
+dn: ou=Users,{{ldap_dc}}
+objectClass: organizationalUnit
+ou: users
+
+dn: ou=Groups,{{ldap_dc}}
+objectClass: organizationalUnit
+ou: groups
+
+dn: ou=Roles,{{ldap_dc}}
+objectClass: organizationalUnit
+ou: roles
+
+dn: ou=projects,{{ldap_dc}}
+objectClass: organizationalUnit
+ou: projects
