@@ -1,4 +1,8 @@
-stage name:'adding remote'
 node {
+  stage name:'Adding remote'
   echo "Building version"
+  
+  stage name:'Pulling from upstream'
+  
+  
 }
