@@ -1,4 +1,4 @@
-FROM debian:8.0
+FROM debian:10.0
 
 MAINTAINER sebastian.graf@konschtanz.de
 
